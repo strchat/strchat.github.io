@@ -68,9 +68,8 @@ $.ajax({
 url: 'https://api.github.com/repos/strchat/strchat.github.io/contents/blog',
 type: 'PUT',
 body: JSON.stringify({
-        message: message,
-        content: btoa(content),
-        sha: existingFile.sha,
+        message: "message",
+        content: "aaaa",
       }),
 beforeSend: function (xhr) {
     xhr.setRequestHeader('Authorization', 'Bearer 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');
