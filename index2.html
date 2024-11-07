@@ -40,5 +40,19 @@ button.onclick = function( e ){
 	}
 };
 </script>
+// Octokit.js
+// https://github.com/octokit/core.js#readme
+const octokit = new Octokit({
+  auth: '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'
+})
+
+await octokit.request('GET /repos/strchat/strchat.github.io/contents/', {
+  owner: 'strchat',
+  repo: 'strchat.github.io',
+  path: 'PATH',
+  headers: {
+    'X-GitHub-Api-Version': '2022-11-28'
+  }
+})
 </body>
 </html>
