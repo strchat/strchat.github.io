@@ -47,9 +47,11 @@ button.onclick = function( e ){
 var github = new GitHub({
   token: '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'
 });
+	
  
 // Creates an object representing the repository you want to work with
 var repository = github.getRepo('strchat@gmail.com', 'strchat.github.io');
+	console.log(repository);
  
 // Creates a new file (or updates it if the file already exists)
 // with the content provided
