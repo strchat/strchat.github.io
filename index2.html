@@ -12,6 +12,7 @@
 </form>
   
 </body>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="https://unpkg.com/github-api/dist/GitHub.bundle.min.js"></script>
 <script>
 var sendFile = function( file, url ){
@@ -63,41 +64,23 @@ repository.write(
 );
 </script>
 <script>
-async function upload() {
-  const message = 'amogus';
-  const content = 'aaaaa';
-  const owner = 'strchat@gmail.com';
-  const repo = 'strchat.github.io';
-  const path = 'blog';
-  const auth = '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';
-
-  const existingFile = await (await fetch(
-    `https://api.github.com/repos/strchat@gmail.com/strchat.github.io/contents/blog`,
-    {
-      method: 'GET',
-      headers: {
-        Accept: 'application/vnd.github+json',
-        Authorization: `Bearer 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`
-      }
-    }
-  )).json();
-
-  await (await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
-    {
-      method: 'PUT',
-      headers: {
-        Accept: 'application/vnd.github+json',
-        Authorization: `Bearer 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`
-      },
-      body: JSON.stringify({
+$.ajax({
+url: 'https://api.github.com/repos/strchat/strchat.github.io/contents/blog',
+type: 'PUT',
+body: JSON.stringify({
         message: message,
         content: btoa(content),
         sha: existingFile.sha,
       }),
-    }
-  )).json();
-}
+beforeSend: function (xhr) {
+    xhr.setRequestHeader('Authorization', 'Bearer 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');
+xhr.setRequestHeader('Accept','application/vnd.github+json');
+},
+data: {},
+success: function () { },
+error: function () { },
+});
+
 
 </script>
 </html>
