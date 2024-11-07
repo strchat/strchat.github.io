@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>File upload</title>
+</head>
+<body>
+<form>
+<input type="file" id="file" />
+<input type="text" id="title" name="title" placeholder="Title" />
+<button id="button">Submit</button>
+</form>
+<script>
+var sendFile = function( file, url ){
+	var request2 = new XMLHttpRequest;
+	request2.open( "PUT", url, false );
+	request2.send( file );
+};
+var sendMetaData = function( title, file ){
+	var request1 = new XMLHttpRequest;
+	var url = "api/upload/file";
+	request1.open( "POST", url, false );
+	request1.setRequestHeader( "Content-Type", "application/json;charset=UTF-8" );
+	request1.onreadystatechange = function(){
+	  if( this.readyState == 4 && this.status == 200 ){
+	    sendFile( file, this.getResponseHeader( "location" ) );
+	  }
+	};
+	request1.send( JSON.stringify( { title: title, name: file.name, size: file.size } ) );
+};
+button = document.getElementById( 'button' );
+fileInput = document.getElementById( 'file' );
+titleInput = document.getElementById( 'title' );
+button.onclick = function( e ){
+	e.preventDefault();
+	var file = fileInput.files[0];
+	var title = titleInput.value;
+	if( file && title ){
+		sendMetaData( title, file );
+	}
+};
+</script>
+</body>
+</html>
